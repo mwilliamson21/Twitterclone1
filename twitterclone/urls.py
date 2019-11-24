@@ -16,9 +16,19 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+# from django.contrib.auth import views as auth_views
+# from twitterclone.authentification.views import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    # path('signup/', signup, name='signup'),
+    
+    # path('addtweet/', addtweetview),
+    # path('addauthor/', addauthorview),
+    # path('login/', login_view, name='login'),
+    # path('logout/', logout_view, name='logout'),
+    # path('error/', errorpage, name='error')
     
 ]

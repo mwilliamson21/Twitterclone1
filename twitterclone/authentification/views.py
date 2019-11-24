@@ -14,10 +14,39 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.contrib import admin
-from django.urls import path
+from django.shortcuts import render, HttpResponseRedirect, reverse
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from twitterclone.authentification.forms import LoginForm
 
 
-urlpatterns = [
-    path('admin/', admin.site.urls)
-    
+def login_view(request):
+    html = "generic_form.html"
+
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            user = authenticate(
+                username=data['username'],
+                password=data['password']
+            )
+            if user:
+
+                login(request, user)
+            else:
+                HttpResponseRedirect(reverse('login'))
+            return HttpResponseRedirect(
+                    request.GET.get('next', reverse('homepage'))
+                )
+
+    form = LoginForm()
+
+    return render(request, html, {'form': form})
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('homepage'))
