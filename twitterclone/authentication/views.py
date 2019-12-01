@@ -17,11 +17,11 @@ Including another URLconf
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from twitterclone.authentification.forms import LoginForm
+from twitterclone.authentication.forms import LoginForm
 
 
 def login_view(request):
-    html = "generic_form.html"
+    html = "login.html"
 
     if request.method == "POST":
         form = LoginForm(request.POST)

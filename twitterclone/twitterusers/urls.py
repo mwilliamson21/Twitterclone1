@@ -16,8 +16,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-
+from twitterclone.twitterusers import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    
+    path('user/<int:id>/', views.profile_view, name='profile')
+]

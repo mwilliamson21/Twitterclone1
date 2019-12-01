@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from twitterclone.authentification.views import (login_view, logout_view)
+from twitterclone.authentication.views import (login_view, logout_view)
 # from django.conf import settings
 # from django.conf.urls.static import static'
 

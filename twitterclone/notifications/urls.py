@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from twitterclone.notifications.views import notification_view
+from twitterclone.notifications import views
 
 urlpatterns = [
-    path('notifications/', notification_view, name='notifications')
+    path('notifications/', views.view_notification, name='notifications')
 ]

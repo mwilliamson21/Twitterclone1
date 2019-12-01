@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <a href='/'>Mainpage</a>
+    <a href='/'>Notifications</a>
+    <a><button>     
+    </button></a>
+    <a href='/'></a>
+    <h1>{{twitteruser}}</h1>
+    <h2>following {{number_following}}</h2>
+    <h3>Made tweets {{ tweet_number }}</h3>
+    <ul>
+        {%for tweet in tweets %}
+        <li>
+            {{tweet.post_date}}
+            <a href='/tweet/{{tweet.id}}'>
+            {{tweet}}
+        </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% if not is_my_user_page %} {% if is_followed %}
+    <a href='/unfollow/{{twitteruser.id}}'>Unfollow</a>
+    {% else %}
+    <a href='/follow/{{twitteruser.id}}'>Follow</a>
+    {% endif %} {% endif %}
+
+    

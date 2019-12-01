@@ -16,19 +16,22 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url, include
-# from django.contrib.auth import views as auth_views
-# from twitterclone.authentification.views import views
-
+from twitterclone.authentication.urls import urlpatterns as auth_urls
+from twitterclone.notifications.urls import urlpatterns as notif_urls
+from twitterclone.tweets.urls import urlpatterns as tweet_urls
+from twitterclone.twitterusers.urls import urlpatterns as user_urls
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     # path('signup/', signup, name='signup'),
-    
     # path('addtweet/', addtweetview),
     # path('addauthor/', addauthorview),
     # path('login/', login_view, name='login'),
     # path('logout/', logout_view, name='logout'),
     # path('error/', errorpage, name='error')
-    
 ]
+urlpatterns += auth_urls
+urlpatterns += notif_urls
+urlpatterns += tweet_urls
+# urlpatterns += profile_urls
+urlpatterns += user_urls
