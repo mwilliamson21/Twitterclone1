@@ -19,4 +19,3 @@ class Notifications(models.Model):
 
     def __str__(self):
         return f"{self.twitter_user}-{self.tweet}"
-     

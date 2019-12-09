@@ -1,0 +1,9 @@
+{% load static %}
+<link rel='stylesheet' href='{% static "main.css" %}'>
+<h1>Tweets Posted</h1>
+<a href='/tweet_posted/'><button>Tweet Posted</button></a>
+<form action=''method='post'>      
+{% csrf_token %}
+{{form.as_p}}
+<input type='submit' value='Submit'>
+</form>

@@ -22,4 +22,5 @@ from twitterclone.authentication.views import (login_view, logout_view)
 urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout')
+    path('createuser/', views.createuser, name='create_user_view')
 ]

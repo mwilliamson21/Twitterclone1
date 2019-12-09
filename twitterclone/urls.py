@@ -29,6 +29,7 @@ urlpatterns = [
     # path('login/', login_view, name='login'),
     # path('logout/', logout_view, name='logout'),
     # path('error/', errorpage, name='error')
+    
 ]
 urlpatterns += auth_urls
 urlpatterns += notif_urls

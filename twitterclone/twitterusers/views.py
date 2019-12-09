@@ -45,7 +45,7 @@ def follow_user(request, id):
     return HttpResponseRedirect(reverse('profile_view', kwargs={'id': id}))
 
 
-def unfollowuser(request, id):
-    follow_user = TwitterUser.objects.get(id=id)
-    request.user.twitteruser.follow.remove(follow_user)
+def unfollow_user(request, id):
+    unfollow_user = TwitterUser.objects.get(id=id)
+    request.user.twitteruser.follow.remove(unfollow_user)
     return HttpResponseRedirect(reverse('profile_view', kwargs={'id': id}))
