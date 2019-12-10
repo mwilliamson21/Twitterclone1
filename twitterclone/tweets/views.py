@@ -16,7 +16,9 @@ def view_tweet(request, id):
 @login_required
 def viewhomepage(request):
     html = 'index.html'
-    data = Tweet.objects.all()
+    following = request.user.twitteruser.following.all()
+    data = Tweet.objects.filter(
+        tweet_author__in=following).order_by('-post_date')
     return render(request, html, {'data': data})
 
 

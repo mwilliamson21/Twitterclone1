@@ -35,13 +35,18 @@ def profile_view(request, id):
     twitteruser = TwitterUser.objects.filter(id=id).first()
     tweets = Tweet.objects.filter(
         tweet_author=twitteruser).order_by('-post_date')
-    return render(request, html, {
-        'tweets': tweets, 'twitteruser': twitteruser})
+    return render(
+        request, html, {
+            'tweets': tweets,
+            'twitteruser': twitteruser,
+            'is_followed': True
+        }
+    )
 
 
 def follow_user(request, id):
     follow_user = TwitterUser.objects.get(id=id)
-    request.user.twitteruser.follow.remove(follow_user)
+    request.user.twitteruser.follow.add(follow_user)
     return HttpResponseRedirect(reverse('profile_view', kwargs={'id': id}))
 
 

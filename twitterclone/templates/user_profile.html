@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
     <a href='/'>Mainpage</a>
     <a href='/'>Notifications</a>
     
-    <!-- <a><button>     
-    </button></a> -->
+    
     <a href='/'></a>
     <h1>{{twitteruser}}</h1>
     <h2>following {{number_following}}</h2>
@@ -19,10 +18,29 @@
         </li>
         {% endfor %}
     </ul>
-    {% if not is_my_user_page %} {% if is_followed %}
-    <a href='/unfollow/{{twitteruser.id}}'>Unfollow</a>
-    {% else %}
-    <a href='/follow/{{twitteruser.id}}'>Follow</a>
-    {% endif %} {% endif %}
+    {% if not is_my_user_page %}
+        {% if is_followed %}
+            <form name ='unfollow' method='POST'>
+            <a href='/unfollow/{{twitteruser.id}}'>Unfollow</button></a>
+        {% else %}
+            <a href='/follow/{{twitteruser.id}}'>Follow</button></a>
+        {% endif %}
+        <input type='hidden' name=rule value='unfollow'/>
+        <input type='hidden' name='id' value='{{user.id}}'/>
+        <input type='submit' value='Unfollow'/>
+
+        {% else %}
+
+        <form name='follow' method='POST'>
+            {% csrf_token %}
+            <input type='hidden' name='rule' value='follow'/>
+            <input type='hidden' name='id' value='{{user.id}}'/>
+            <input type='submit' value='Follow' />
+        </form>
+        
+    {% endif %}
+    
+
+<a href='/'>home</a>
 
     

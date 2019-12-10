@@ -6,20 +6,20 @@
 <a href='/logout/'>Logout</a>
 <a href= '/notifications/'>User Notifications</a>
 <a href= 'signup/'>Register</a>
-<a href= '/user/{{user.twitteruser.id}}'>User profile</a>
+<a href= '/user/{{user.twitteruser.id}}/'>User profile</a>
 </div>
 <div>
 <h1> {{user}}</h1>
 </div>
 <div>
     <ul>
-
-    
+ 
 {% for item in data %}
 
-<li>{{item.tweet_author}}</li>
+<li><a href='/user/{{item.tweet_author.id}}/'>{{item.tweet_author}}</a></li>
 <li>{{item.body}}</li>
-</li>{{item.post_date}}</li>
+</li><a href='/tweet/{{item.id}}/'>{{item.post_date}}</a></li>
+
 
 {% endfor %}
 </ul>
