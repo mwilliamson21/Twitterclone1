@@ -19,6 +19,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from twitterclone.authentication.forms import LoginForm, UserAdd
 from django.contrib.auth.models import User
+from twitterclone.twitterusers.models import TwitterUser
 
 
 def login_view(request):
@@ -48,7 +49,7 @@ def login_view(request):
 
 
 def createuser(request):
-    html = 'authentication/signup.html'
+    html = 'signup.html'
     if request.method == 'POST':
         form = UserAdd(request.POST)
         if form.is_valid():
@@ -59,13 +60,12 @@ def createuser(request):
             )
         new_user = TwitterUser.objects.create(
             user=user,
-            username=data['username'],
-            password=data['password'],
+            name=data['username']
         )
-        new_user.follow.add(new_user)
+        new_user.following.add(new_user)
         return HttpResponseRedirect(reverse('homepage'))
     form = UserAdd()
-    return render(request, html {'form': form}
+    return render(request, html, {'form': form})
 
 
 @login_required

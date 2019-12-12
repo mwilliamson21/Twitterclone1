@@ -8,4 +8,4 @@ class LoginForm(forms.Form):
 
 class UserAdd(forms.Form):
     username = forms.CharField(max_length=50)
-    password = forms.Charfield(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput)
