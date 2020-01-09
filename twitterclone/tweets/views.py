@@ -5,21 +5,25 @@ from twitterclone.tweets.forms import AddTweetForm
 import re
 from twitterclone.notifications.models import Notifications
 from twitterclone.twitterusers.models import TwitterUser
+from django.views import View
+from django.utils.decorators import method_decorator
 
 
-def view_tweet(request, id):
-    html = 'tweet.html'
-    data = Tweet.objects.filter(id=id)
-    return render(request, html, {'data': data})
+class ViewTweet(View):
+    def get(self, request, id):
+        html = 'tweet/view_tweet.html'
+        data = Tweet.objects.filter(id=id)
+        return render(request, html, {'data': data})
 
 
-@login_required
-def viewhomepage(request):
-    html = 'index.html'
-    following = request.user.twitteruser.following.all()
-    data = Tweet.objects.filter(
-        tweet_author__in=following).order_by('-post_date')
-    return render(request, html, {'data': data})
+@method_decorator(login_required, name='dispatch')
+class ViewHomePage(View):
+    def get(self, request):
+        html = 'index.html'
+        following = request.user.twitteruser.following.all()
+        data = Tweet.objects.filter(
+            tweet_author__in=following).order_by('-post_date')
+        return render(request, html, {'data': data})
 
 
 @login_required

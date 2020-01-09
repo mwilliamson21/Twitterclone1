@@ -4,8 +4,8 @@ from twitterclone.tweets import views
 
 urlpatterns = [
 
-    path('', views.viewhomepage, name='homepage'),
-    path('tweet/<int:id>/', views.view_tweet, name='view_tweets'),
+    path('', views.ViewHomePage.as_view(), name='homepage'),
+    path('tweet/<int:id>/', views.ViewTweet.as_view(), name='view_tweet'),
     path('maketweets/', views.make_tweets),
 
 ]

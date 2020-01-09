@@ -20,32 +20,59 @@ from django.contrib.auth.decorators import login_required
 from twitterclone.authentication.forms import LoginForm, UserAdd
 from django.contrib.auth.models import User
 from twitterclone.twitterusers.models import TwitterUser
+from django.views import View
 
 
-def login_view(request):
-    html = "login.html"
+# def login_view(request):
+#     html = "login.html"
 
-    if request.method == "POST":
-        form = LoginForm(request.POST)
+#     if request.method == "POST":
+#         form = LoginForm(request.POST)
 
-        if form.is_valid():
-            data = form.cleaned_data
-            user = authenticate(
-                username=data['username'],
-                password=data['password']
-            )
-            if user:
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             user = authenticate(
+#                 username=data['username'],
+#                 password=data['password']
+#             )
+#             if user:
 
-                login(request, user)
-            else:
-                HttpResponseRedirect(reverse('login'))
-            return HttpResponseRedirect(
-                    request.GET.get('next', reverse('homepage'))
+#                 login(request, user)
+#             else:
+#                 HttpResponseRedirect(reverse('login'))
+#             return HttpResponseRedirect(
+#                     request.GET.get('next', reverse('homepage'))
+#                 )
+
+#     form = LoginForm()
+
+#     return render(request, html, {'form': form})
+
+class LoginView(View):
+    def get(self, request):
+        html = "login.html"
+
+        if request.method == "POST":
+            form = LoginForm(request.POST)
+
+            if form.is_valid():
+                data = form.cleaned_data
+                user = authenticate(
+                    username=data['username'],
+                    password=data['password']
                 )
+                if user:
 
-    form = LoginForm()
+                    login(request, user)
+                else:
+                    return HttpResponseRedirect(reverse('login'))
+                return HttpResponseRedirect(
+                        request.GET.get('next', reverse('homepage'))
+                    )
 
-    return render(request, html, {'form': form})
+        form = LoginForm()
+
+        return render(request, html, {'form': form})
 
 
 def createuser(request):

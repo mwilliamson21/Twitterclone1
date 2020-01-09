@@ -6,6 +6,7 @@ from twitterclone.twitterusers.models import TwitterUser
 from twitterclone.tweets.models import Tweet
 from twitterclone.notifications.models import Notifications
 # from django.contrib.auth import login, logout
+from django.views import View
 
 
 @login_required
@@ -30,18 +31,28 @@ def NewUserForm_view(request):
     })
 
 
-def profile_view(request, id):
-    html = 'user_profile.html'
-    twitteruser = TwitterUser.objects.filter(id=id).first()
-    tweets = Tweet.objects.filter(
-        tweet_author=twitteruser).order_by('-post_date')
-    return render(
-        request, html, {
-            'tweets': tweets,
-            'twitteruser': twitteruser,
-            'is_followed': True
-        }
-    )
+# def profile_view(request, id):
+#     html = 'user_profile.html'
+#     twitteruser = TwitterUser.objects.filter(id=id).first()
+#     tweets = Tweet.objects.filter(
+#         tweet_author=twitteruser).order_by('-post_date')
+#     return render(
+#         request, html, {
+#             'tweets': tweets,
+#             'twitteruser': twitteruser,
+#             'is_followed': True
+#         }
+#     )
+
+class ProfileView(View):
+    def get(self, request, id):
+        html = 'user_profile.html'
+        twitteruser = TwitterUser.objects.filter(id=id).first()
+        tweets = Tweet.objects.filter(
+            tweet_author=twitteruser).order_by('-post_date')
+        return render(request, html, {
+            'tweets': tweets, 'twitteruser': twitteruser,
+            'is_followed': True})
 
 
 def follow_user(request, id):
